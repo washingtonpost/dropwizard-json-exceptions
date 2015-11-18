@@ -10,7 +10,7 @@
     
     <groupId>com.washingtonpost.dropwizard</groupId>
     <artifactId>dropwizard-json-exceptions</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     
     <properties>
@@ -22,7 +22,7 @@
         <connection>scm:git:git@github.com:washingtonpost/dropwizard-json-exceptions.git</connection>
         <developerConnection>scm:git:git@github.com:washingtonpost/dropwizard-json-exceptions.git</developerConnection>
         <url>https://github.com/washingtonpost/dropwizard-json-exceptions</url>
-        <tag>1.0.0</tag>
+        <tag>HEAD</tag>
     </scm>
     
     
