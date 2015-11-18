@@ -21,6 +21,37 @@ server:
     registerDefaultExceptionMappers: false
 ```
 
+In your Application class itself, you can either auto-detect the ExceptionMappers with a guice module configuration like:
+```
+import com.hubspot.dropwizard.guice.GuiceBundle;
+
+public class MyAppApplication extends Application<MyAppConfiguration> {
+    private GuiceBundle<MyAppConfiguration> guiceBundle;
+
+    @Override
+    public void initialize(Bootstrap<MyAppConfiguration> bootstrap) {
+        guiceBundle = GuiceBundle.<MyAppConfiguration>newBuilder()
+                .addModule(new FooModule())
+                .enableAutoConfig("com.washingtonpost.dropwizard.exceptions.mappers")
+                .setConfigClass(MyAppConfiguration.class)
+                .build();
+```
+
+Alternatively, you can just manually add whatever exception mappers you want directly to your Jersey ResourceConfig:
+
+```
+import com.washingtonpost.dropwizard.exceptions.mappers.JsonProcessingExceptionMapper;
+import com.washingtonpost.dropwizard.exceptions.mappers.RuntimeExceptionMapper;
+
+public class MyAppApplication extends Application<MyAppConfiguration> {
+
+    @Override
+    public void run(MyAppConfiguration configuration, Environment environment) throws Exception {
+        environment.jersey().register(new JsonProcessingExceptionMapper(true));
+        environment.jersey().register(new RuntimeExceptionMapper());
+        
+```
+
 ## TODO
 This JAR is really opinionated about JSON output, mapped exceptions, and default verbosity.  To improve its re-usability, make a lot of the behavior of the 2 exception mappers configurable.
 
