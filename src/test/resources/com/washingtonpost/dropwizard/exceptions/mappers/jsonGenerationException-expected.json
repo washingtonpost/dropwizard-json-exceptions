@@ -1,0 +1,5 @@
+{
+    "code": 500,
+    "message": "Error generating JSON",
+    "details": "There was a problem"
+}

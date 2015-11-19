@@ -1,0 +1,5 @@
+{
+    "code": 500,
+    "message": "Unable to deserialize the specific type",
+    "details": "No suitable constructor found for blah"
+}

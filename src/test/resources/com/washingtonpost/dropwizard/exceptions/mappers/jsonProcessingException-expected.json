@@ -1,0 +1,5 @@
+{
+    "code": 400,
+    "message": "Unable to process JSON",
+    "details": "Something went wrong here!"
+}

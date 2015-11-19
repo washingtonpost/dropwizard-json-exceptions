@@ -1,0 +1,5 @@
+<ErrorMessage xmlns="">
+    <code>400</code>
+    <message>Unable to process JSON</message>
+    <details>Something went wrong here!</details>
+</ErrorMessage>

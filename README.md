@@ -3,6 +3,15 @@ Reusable ExceptionMappers for Dropwizard Apps that want more verbose JSON error 
 
 Dropwizard intentionally provides pretty obtuse error messages to the end user; if you're interested in providing additional JSON-formatted exceptions for any exceptions that happen during execution of your REST endpoints, then just add this JAR to your classpath and turn off the Dropwizard server's standard exception mappers.
 
+For example, the kinds of responses you'll get from a REST endpoint in your service that encounters a JsonProcessingException might look like:
+```
+{
+    "code": 400,
+    "message": "Unable to process JSON",
+    "details": "Unexpected token (END_OBJECT), expected FIELD_NAME: missing property 'type' that is to contain type id  (for class com.washingtonpost.arc.ans.v0_3.model.Story)"
+}
+```
+
 ## Integration
 Add this JAR to your Dropwizard -server's POM
 
@@ -52,7 +61,14 @@ public class MyAppApplication extends Application<MyAppConfiguration> {
         
 ```
 
-## TODO
-This JAR is really opinionated about JSON output, mapped exceptions, and default verbosity.  To improve its re-usability, make a lot of the behavior of the 2 exception mappers configurable.
+## Configuring Verbosity and Response Formats
+The ExceptionMappers in this JAR contain default constructors that create output messages with "details" and in a JSON format.
 
-Also, add tests!
+You can control either of those behaviors by turning details off or providing a MediaType (like MediaType.APPLICATION_JSON_TYPE):
+```
+    ExceptionMapper noDetailsXmlMapper = 
+        new JsonProcessingExceptionMapper(false, MediaType.APPLICATION_XML_TYPE);
+
+```
+
+Note: be mindful of the potential security concerns (information leak) by setting details=true in your runtime exception mapper.

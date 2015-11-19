@@ -18,15 +18,18 @@ import javax.ws.rs.ext.Provider;
 @Provider
 public class JsonProcessingExceptionMapper implements ExceptionMapper<JsonProcessingException> {
     private static final Logger LOGGER = LoggerFactory.getLogger(JsonProcessingExceptionMapper.class);
-    private static final MediaType MEDIA_TYPE = MediaType.APPLICATION_JSON_TYPE;
+    private static final boolean DEFAULT_SHOW_DETAILS = true;
+    private static final MediaType DEFAULT_MEDIA_TYPE = MediaType.APPLICATION_JSON_TYPE;
     private final boolean showDetails;
+    private final MediaType mediaType;
 
     public JsonProcessingExceptionMapper() {
-        this(true);
+        this(DEFAULT_SHOW_DETAILS, DEFAULT_MEDIA_TYPE);
     }
 
-    public JsonProcessingExceptionMapper(boolean showDetails) {
+    public JsonProcessingExceptionMapper(boolean showDetails, MediaType mediaType) {
         this.showDetails = showDetails;
+        this.mediaType = mediaType;
     }
 
     @Override
@@ -38,7 +41,10 @@ public class JsonProcessingExceptionMapper implements ExceptionMapper<JsonProces
             LOGGER.warn("Error generating JSON", exception);
             return Response
                     .serverError()
-                    .type(MEDIA_TYPE)
+                    .type(this.mediaType)
+                    .entity(new ErrorMessage(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(),
+                            "Error generating JSON",
+                            showDetails? exception.getOriginalMessage() : null))
                     .build();
         }
 
@@ -52,7 +58,10 @@ public class JsonProcessingExceptionMapper implements ExceptionMapper<JsonProces
             LOGGER.error("Unable to deserialize the specific type", exception);
             return Response
                     .serverError()
-                    .type(MEDIA_TYPE)
+                    .type(this.mediaType)
+                    .entity(new ErrorMessage(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(),
+                            "Unable to deserialize the specific type",
+                            showDetails? exception.getOriginalMessage() : null))
                     .build();
         }
 
@@ -63,7 +72,7 @@ public class JsonProcessingExceptionMapper implements ExceptionMapper<JsonProces
         final ErrorMessage errorMessage = new ErrorMessage(Response.Status.BAD_REQUEST.getStatusCode(),
                 "Unable to process JSON", showDetails ? message : null);
         return Response.status(Response.Status.BAD_REQUEST)
-                .type(MEDIA_TYPE)
+                .type(this.mediaType)
                 .entity(errorMessage)
                 .build();
     }

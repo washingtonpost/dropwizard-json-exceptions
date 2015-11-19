@@ -15,6 +15,10 @@
     
     <properties>
         <version.dropwizard>0.8.1</version.dropwizard>
+        <version.jackson.xml.databind>0.6.2</version.jackson.xml.databind>
+        <version.junit>4.12</version.junit>
+        <version.skyscreamer.jsonassert>1.2.3</version.skyscreamer.jsonassert>
+        <version.slf4j>1.7.12</version.slf4j>
         <version.wp.checkstyle>2.0</version.wp.checkstyle>
     </properties>
 
@@ -35,6 +39,46 @@
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-jersey</artifactId>
             <version>${version.dropwizard}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${version.slf4j}</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <!--
+        TEST SCOPED DEPENDENCIES
+        -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${version.junit}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.skyscreamer</groupId>
+            <artifactId>jsonassert</artifactId>
+            <version>${version.skyscreamer.jsonassert}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml</groupId>
+            <artifactId>jackson-xml-databind</artifactId>
+            <version>${version.jackson.xml.databind}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>xmlunit</groupId>
+            <artifactId>xmlunit</artifactId>
+            <version>1.6</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${version.slf4j}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     
