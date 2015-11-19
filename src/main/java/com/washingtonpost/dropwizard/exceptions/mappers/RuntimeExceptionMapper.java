@@ -20,8 +20,8 @@ import org.slf4j.LoggerFactory;
  * <li>Provision of general runtime exception to response mapping</li>
  * </ul>
  * <p>The RuntimeExceptionMapper has a DEFAULT_SHOW_DETAILS set to false because it's questionable security to emit
- * stack traces from a REST API and it makes upgrading & testing the exception mapper hard because comparing against stack trace
- * Strings for equality or near-equality is pretty lame</p>
+ * stack traces from a REST API and it makes upgrading and testing the exception mapper hard because comparing against stack
+ * trace Strings for equality or near-equality is pretty lame</p>
  */
 @Provider
 public class RuntimeExceptionMapper implements ExceptionMapper<RuntimeException> {
