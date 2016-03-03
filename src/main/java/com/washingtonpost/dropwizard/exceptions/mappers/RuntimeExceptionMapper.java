@@ -47,7 +47,7 @@ public class RuntimeExceptionMapper implements ExceptionMapper<RuntimeException>
         // Build default response
         Response defaultResponse = Response.serverError()
                 .type(this.mediaType)
-                .entity(new ErrorMessage(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), 
+                .entity(new ErrorMessage(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(),
                                          exception.getMessage(),
                                          this.showDetails ? stackTraceToString(exception) : null))
                 .build();
@@ -70,16 +70,28 @@ public class RuntimeExceptionMapper implements ExceptionMapper<RuntimeException>
             return Response
                     .status(Response.Status.UNAUTHORIZED)
                     .type(this.mediaType)
-                    .entity(new ErrorMessage(Response.Status.UNAUTHORIZED.getStatusCode(), 
+                    .entity(new ErrorMessage(Response.Status.UNAUTHORIZED.getStatusCode(),
                                              exception.getMessage(),
                                              this.showDetails ? stackTraceToString(exception) : null))
                     .build();
         }
+
+        if (webAppException.getResponse().getStatus() == 403) {
+            return Response
+                    .status(Response.Status.FORBIDDEN)
+                    .type(this.mediaType)
+                    .entity(new ErrorMessage(Response.Status.FORBIDDEN.getStatusCode(),
+                                             exception.getMessage(),
+                                             this.showDetails ? stackTraceToString(exception) : null))
+                    .build();
+        }
+
+
         if (webAppException.getResponse().getStatus() == 404) {
             return Response
                     .status(Response.Status.NOT_FOUND)
                     .type(this.mediaType)
-                    .entity(new ErrorMessage(Response.Status.NOT_FOUND.getStatusCode(), 
+                    .entity(new ErrorMessage(Response.Status.NOT_FOUND.getStatusCode(),
                                              exception.getMessage(),
                                              this.showDetails ? stackTraceToString(exception) : null))
                     .build();
