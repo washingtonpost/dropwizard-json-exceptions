@@ -54,6 +54,7 @@ public class RuntimeExceptionMapper implements ExceptionMapper<RuntimeException>
 
         // Check for any specific handling
         if (exception instanceof WebApplicationException) {
+            LOGGER.info("Using specific handler");
             return handleWebApplicationException(exception, defaultResponse);
         }
 
@@ -99,7 +100,16 @@ public class RuntimeExceptionMapper implements ExceptionMapper<RuntimeException>
 
         LOGGER.error(exception.getMessage(), exception);
 
-        return defaultResponse;
+        Response r = Response
+            .status(webAppException.getResponse().getStatus())
+            .type(this.mediaType)
+            .entity(new ErrorMessage(webAppException.getResponse().getStatus(),
+                                     exception.getMessage(),
+                                     this.showDetails ? stackTraceToString(exception) : null))
+            .build();
+
+        return r;
+
     }
 
     // Basically the same as org.apache.commons.lang.exception.ExceptionUtils.getStackTrace(Throwable), without the dependency

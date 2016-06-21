@@ -1,5 +1,9 @@
 # dropwizard-json-exceptions
 
+## 1.1.2 2016/06/21
+
+* All WebAppExceptions should be mapped to JSON with their own response type
+
 ## 1.1.1 2016/03/03
 
 * Added 403s to RuntimeExceptionMapper

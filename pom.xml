@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    
+
     <parent>
         <groupId>com.washingtonpost</groupId>
         <artifactId>wp-oss-parent-pom</artifactId>
         <version>0.0.8</version>
     </parent>
-    
+
     <groupId>com.washingtonpost.dropwizard</groupId>
     <artifactId>dropwizard-json-exceptions</artifactId>
     <version>1.1.2-SNAPSHOT</version>
     <packaging>jar</packaging>
-    
+
     <properties>
         <version.dropwizard>0.8.1</version.dropwizard>
         <version.jackson.xml.databind>0.6.2</version.jackson.xml.databind>
@@ -28,10 +28,10 @@
         <url>https://github.com/washingtonpost/dropwizard-json-exceptions</url>
         <tag>HEAD</tag>
     </scm>
-    
-    
+
+
     <dependencies>
-        
+
         <!--
             TEST SCOPED dependencies
         -->
@@ -46,7 +46,7 @@
             <version>${version.slf4j}</version>
             <scope>provided</scope>
         </dependency>
-        
+
         <!--
         TEST SCOPED DEPENDENCIES
         -->
@@ -81,7 +81,7 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    
+
     <build>
         <pluginManagement>
             <plugins>

@@ -37,4 +37,12 @@ public class TestRuntimeExceptionMapper extends AbstractExceptionMapperTest {
                              404,
                              "webAppException404-expected.json");
     }
+
+    @Test
+    public void testWebAppExceptionContentType() throws JSONException {
+        runJsonAssertionTest(DEFAULT_MAPPER,
+                             new WebApplicationException("Wrong type", Response.Status.UNSUPPORTED_MEDIA_TYPE),
+                             415,
+                             "webAppException415-expected.json");
+    }
 }
