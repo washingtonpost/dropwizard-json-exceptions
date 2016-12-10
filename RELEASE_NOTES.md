@@ -1,5 +1,9 @@
 # dropwizard-json-exceptions
 
+## 2.0.0 2016/12/xx
+
+* Upgraded dropwizard dependency to 1.0.5
+
 ## 1.1.2 2016/06/21
 
 * All WebAppExceptions should be mapped to JSON with their own response type
