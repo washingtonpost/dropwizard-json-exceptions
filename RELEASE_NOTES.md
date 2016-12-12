@@ -1,6 +1,6 @@
 # dropwizard-json-exceptions
 
-## 2.0.0 2016/12/xx
+## 2.0.0 2016/12/12
 
 * Upgraded dropwizard dependency to 1.0.5
 
