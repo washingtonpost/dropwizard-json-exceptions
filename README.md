@@ -12,6 +12,14 @@ For example, the kinds of responses you'll get from a REST endpoint in your serv
 }
 ```
 
+### Dropwizard Compatability Matrix
+
+| Dropwizard Version | Peer-Authenticator Version |
+|--------------------|----------------------------|
+|        0.8.*       |            1.x.y           |
+|        0.9.*       |            N/A             |
+|        1.0.*       |            2.x.y           |
+
 ## Integration
 Add this JAR to your Dropwizard -server's POM
 
